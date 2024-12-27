@@ -17,7 +17,7 @@ const TaskList = ({ tasks, completeTask }) => (
         >
           <div>
             <p className="text-lg font-medium">{task.text}</p>
-            <span className="text-yellow-300">+{task.reward} coins</span>
+            <span className="text-yellow-300">+{task.reward} монет</span>
           </div>
           <button
             onClick={() => completeTask(task.id, task.text, task.reward)}
