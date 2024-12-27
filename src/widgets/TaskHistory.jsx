@@ -8,7 +8,7 @@ const TaskHistory = ({ history }) => (
       {history.map((entry, index) => (
         <div
           key={index}
-          className="bg-gray-800 p-4 rounded-lg flex justify-between items-center shadow-lg"
+          className="bg-gray-800 p-4 rounded-lg flex flex-wrap justify-between items-center shadow-lg"
         >
           <span>{entry.date}</span>
           <span className="font-medium">{entry.taskName}</span>
