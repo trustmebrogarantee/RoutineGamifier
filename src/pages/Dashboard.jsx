@@ -52,7 +52,7 @@ const Dashboard = () => {
   const completeTask = (id, text, reward) => {
     setCoins(coins + reward);
     setTasks(tasks.filter(task => task.id !== id));
-    setTaskHistory([...taskHistory, { date: new Date().toLocaleString(), taskName: text }]);
+    setTaskHistory([...taskHistory, { date: new Date().toLocaleString('RU-ru'), taskName: text }]);
   };
   useEffect(() => {
     const GENERATED_TASKS_NUMBER = 4
