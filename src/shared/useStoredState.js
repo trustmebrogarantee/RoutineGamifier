@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { safeLocalStorage } from "@shared/SafeLocalStorage"
+import { safeLocalStorage } from "@shared/safeLocalStorage"
 
 export const useStoredState = (key, initialValue) => {
   const [value, _setValue] = useState(() => safeLocalStorage.get(key, initialValue))

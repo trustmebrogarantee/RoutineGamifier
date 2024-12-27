@@ -9,7 +9,7 @@ import PurchaseHistory from '@widgets/PurchaseHistory';
 
 import { times } from '@shared/times';
 import { generateTask } from '@features/generateTasks';
-import { safeLocalStorage } from '@shared/SafeLocalStorage';
+import { safeLocalStorage } from '@shared/safeLocalStorage';
 import { useStoredState } from '@shared/useStoredState';
 
 const DATE_KEY = (new Date()).toLocaleDateString('RU-ru')
