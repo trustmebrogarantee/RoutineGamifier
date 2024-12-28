@@ -1,12 +1,19 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import NotFound from '../shared/NotFound';
+import NotFound from '@shared/NotFound';
+import { RoutineGamifier } from "@shared/types/RoutineGamifier";
 
-const TaskList = ({ tasks, completeTask }) => (
+type Props = {
+  taskList: RoutineGamifier.ITaskList,
+  completeTask: (task: RoutineGamifier.Task) => void,
+}
+
+const TaskList: React.FC<Props> = ({ taskList, completeTask }) => (
   <section className="mb-8">
     <h2 className="text-2xl font-semibold mb-4">Ваши задания</h2>
-    {tasks.length === 0 && <NotFound>Все задания выполнены!</NotFound>}
+    {taskList.items.length === 0 && <NotFound>Все задания выполнены!</NotFound>}
     <div className="space-y-4">
-      {tasks.map((task) => (
+      {taskList.items.map((task) => (
         <motion.div
           key={task.id}
           initial={{ opacity: 0, y: 20 }}
@@ -20,7 +27,7 @@ const TaskList = ({ tasks, completeTask }) => (
             <span className="text-yellow-300">+{task.reward} монет</span>
           </div>
           <button
-            onClick={() => completeTask(task.id, task.text, task.reward)}
+            onClick={() => completeTask(task)}
             className="inline-flex shrink-0 justify-center items-center h-10 w-10 text-center bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-md"
           >
             🌟

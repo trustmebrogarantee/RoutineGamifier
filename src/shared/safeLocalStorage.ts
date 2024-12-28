@@ -1,5 +1,5 @@
 export const safeLocalStorage = {
-  set(key, value) {
+  set(key: string, value: unknown) {
     try {
       const serializedValue = JSON.stringify({ value });
       localStorage.setItem(key, serializedValue);
@@ -8,7 +8,7 @@ export const safeLocalStorage = {
     }
   },
 
-  get(key, defaultValue = null) {
+  get(key: string, defaultValue: unknown = null) {
     try {
       const serializedValue = localStorage.getItem(key);
       return serializedValue ? JSON.parse(serializedValue)?.value : defaultValue;
@@ -18,7 +18,7 @@ export const safeLocalStorage = {
     }
   },
 
-  remove(key) {
+  remove(key: string) {
     try {
       localStorage.removeItem(key);
     } catch (error) {

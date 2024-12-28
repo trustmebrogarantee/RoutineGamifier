@@ -1,17 +1,16 @@
 import { motion } from 'framer-motion';
+import { RoutineGamifier } from '@shared/types/RoutineGamifier';
+import React from 'react';
 
-const Shop = ({ coins, shopItems, buyItem, notification }) => (
+interface Props {
+  coins: RoutineGamifier.Coins,
+  shopItems: RoutineGamifier.ShopItem[],
+  purchaseItem: (item: RoutineGamifier.ShopItem) => void,
+}
+
+const Shop: React.FC<Props> = ({ coins, shopItems, purchaseItem }) => (
   <section>
     <h2 className="text-2xl font-semibold mb-4">Лавка</h2>
-    {notification && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="bg-red-500 text-white p-2 rounded mb-4 text-center"
-      >
-        {notification}
-      </motion.div>
-    )}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {shopItems.map(item => (
         <motion.div
@@ -24,7 +23,7 @@ const Shop = ({ coins, shopItems, buyItem, notification }) => (
           <h3 className="text-lg font-medium mb-2">{item.name}</h3>
           <p className="text-yellow-300 mb-4">{item.price} coins</p>
           <button
-            onClick={() => buyItem(item.price, item.name)}
+            onClick={() => purchaseItem(item)}
             className={`px-4 py-2 rounded text-white ${coins < item.price ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
             disabled={coins < item.price}
           >
@@ -35,5 +34,4 @@ const Shop = ({ coins, shopItems, buyItem, notification }) => (
     </div>
   </section>
 );
-
 export default Shop;
