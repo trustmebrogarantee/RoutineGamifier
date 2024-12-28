@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { RoutineGamifier } from '@shared/types/RoutineGamifier';
 import React from 'react';
 
-interface Props {
+type Props = {
   coins: RoutineGamifier.Coins,
   shopItems: RoutineGamifier.ShopItem[],
   purchaseItem: (item: RoutineGamifier.ShopItem) => void,
