@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css';
+import React from 'react';
 import type { RoutineGamifier } from '@shared/types/RoutineGamifier';
 
 import Shop from '@widgets/Shop';
@@ -23,7 +24,7 @@ const STORAGE_KEYS = {
 };
 
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const balance = useBalance({ storageKey: STORAGE_KEYS.BALANCE })
   const completedTasksHistory = useHistory<RoutineGamifier.Task>({ storageKey: STORAGE_KEYS.TASK_HISTORY })
   const purchaseHistory = useHistory<RoutineGamifier.ShopItem>({ storageKey: STORAGE_KEYS.PURCHASE_HISTORY })
