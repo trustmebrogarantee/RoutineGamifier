@@ -28,7 +28,7 @@ const Shop = ({ coins, shopItems, buyItem, notification }) => (
             className={`px-4 py-2 rounded text-white ${coins < item.price ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
             disabled={coins < item.price}
           >
-            Buy
+            Купить
           </button>
         </motion.div>
       ))}
