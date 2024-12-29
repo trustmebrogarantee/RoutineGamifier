@@ -2,7 +2,7 @@ import React from "react";
 import NotFound from "@shared/NotFound";
 import { RoutineGamifier } from "@shared/types/RoutineGamifier";
 
-type Props = {
+interface Props {
   history: RoutineGamifier.History<RoutineGamifier.ShopItem>
 }
 

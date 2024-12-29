@@ -1,6 +1,12 @@
+import React from 'react';
 import { motion } from 'framer-motion';
+import { RoutineGamifier } from '@shared/types/RoutineGamifier';
 
-const Header = ({ coins }) => (
+interface Props {
+  coins: RoutineGamifier.Coins
+}
+
+const Header: React.FC<Props> = ({ coins }) => (
   <header className="flex backdrop-blur-md sticky top-0 p-2 flex-wrap gap-2 justify-between items-center w-full max-w-4xl mb-8">
     <h1 className="text-3xl font-bold">RoutineGamifier</h1>
     <div className="flex items-center bg-gray-800 py-2 px-4 rounded-lg">

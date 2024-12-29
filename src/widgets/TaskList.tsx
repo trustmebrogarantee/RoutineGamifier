@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import NotFound from '@shared/NotFound';
 import { RoutineGamifier } from "@shared/types/RoutineGamifier";
 
-type Props = {
+interface Props {
   taskList: RoutineGamifier.ITaskList,
   completeTask: (task: RoutineGamifier.Task) => void,
 }
