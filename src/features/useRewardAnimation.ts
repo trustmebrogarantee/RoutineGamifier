@@ -7,7 +7,7 @@ export function useRewardAnimation() {
   let renderer: THREE.WebGLRenderer;
   let coinTextures: THREE.Texture[];
   let animationFrame: number | null = null;
-  const coins: THREE.Sprite[] = [];
+  const coins: { sprite: THREE.Sprite, velocity: THREE.Vector3 }[] = [];
 
   const initCanvas = () => {
     const canvas = document.createElement('canvas');

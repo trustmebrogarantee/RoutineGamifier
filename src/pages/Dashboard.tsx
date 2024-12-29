@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
   const shop = useShop({ storageKey: STORAGE_KEYS.CURRENT_SHOP_ITEMS })
   const taskList = useTaskList({ storageKey: STORAGE_KEYS.CURRENT_TASKS })
   const { animate } = useRewardAnimation() 
-  const [playRewardSound] = useSound(`/RoutineGamifier/sfx/money-rain.m4a`);
+  const [playRewardSound] = useSound(`/RoutineGamifier/sfx/money-rain.m4a`, { volume: 0.5 });
 
   const completeTask = (task: RoutineGamifier.Task) => {
     balance.topUp(task.reward)
