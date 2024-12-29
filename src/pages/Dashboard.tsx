@@ -13,6 +13,8 @@ import { useHistory } from '@features/useHistory';
 import { useShop } from '@features/useShop';
 import { useTaskList } from '@features/useTaskList';
 import { useRewardAnimation } from '@features/useRewardAnimation';
+import useSound from 'use-sound';
+
 
 const DATE_KEY = (new Date()).toLocaleDateString('RU-ru')
 
@@ -31,12 +33,14 @@ const Dashboard: React.FC = () => {
   const shop = useShop({ storageKey: STORAGE_KEYS.CURRENT_SHOP_ITEMS })
   const taskList = useTaskList({ storageKey: STORAGE_KEYS.CURRENT_TASKS })
   const { animate } = useRewardAnimation() 
+  const [playRewardSound] = useSound(`/RoutineGamifier/sfx/money-rain.m4a`);
 
   const completeTask = (task: RoutineGamifier.Task) => {
     balance.topUp(task.reward)
     completedTasksHistory.add('COMPLETE', task.text, task)
     taskList.remove(task.id)
     animate()
+    playRewardSound()
   }
 
   const purchaseItem = (item: RoutineGamifier.ShopItem) => {
@@ -55,6 +59,11 @@ const Dashboard: React.FC = () => {
         <Shop coins={balance.balance} shopItems={shop.items} purchaseItem={purchaseItem} />
         <PurchaseHistory history={purchaseHistory} />
         <TaskHistory history={completedTasksHistory} />
+        <button className="pt-4" onClick={() => {
+          localStorage.removeItem(STORAGE_KEYS.CURRENT_TASKS)
+          scrollTo(0, 0)
+          location.reload()
+        }}>Reset cache</button>
       </main>
     </div>
   );

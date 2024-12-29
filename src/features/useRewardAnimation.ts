@@ -1,5 +1,4 @@
 import { pickRandom } from '@shared/pickRandom';
-import { playSound } from '@shared/playSound';
 import * as THREE from 'three';
 
 export function useRewardAnimation() {
@@ -95,7 +94,6 @@ export function useRewardAnimation() {
 
   const animate = () => {
     if (!scene) initCanvas()
-    playSound('money-rain.m4a')
     for (let i = 0; i < 250; i++) createCoin()
     if (animationFrame === null) animateScene()
   };
