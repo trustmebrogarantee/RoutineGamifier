@@ -12,6 +12,7 @@ import { useBalance } from '@features/useBalance';
 import { useHistory } from '@features/useHistory';
 import { useShop } from '@features/useShop';
 import { useTaskList } from '@features/useTaskList';
+import { useRewardAnimation } from '@features/useRewardAnimation';
 
 const DATE_KEY = (new Date()).toLocaleDateString('RU-ru')
 
@@ -23,18 +24,19 @@ const STORAGE_KEYS = {
   BALANCE: '_balance_',
 };
 
-
 const Dashboard: React.FC = () => {
   const balance = useBalance({ storageKey: STORAGE_KEYS.BALANCE })
   const completedTasksHistory = useHistory<RoutineGamifier.Task>({ storageKey: STORAGE_KEYS.TASK_HISTORY })
   const purchaseHistory = useHistory<RoutineGamifier.ShopItem>({ storageKey: STORAGE_KEYS.PURCHASE_HISTORY })
   const shop = useShop({ storageKey: STORAGE_KEYS.CURRENT_SHOP_ITEMS })
   const taskList = useTaskList({ storageKey: STORAGE_KEYS.CURRENT_TASKS })
+  const { animate } = useRewardAnimation() 
 
   const completeTask = (task: RoutineGamifier.Task) => {
     balance.topUp(task.reward)
     completedTasksHistory.add('COMPLETE', task.text, task)
     taskList.remove(task.id)
+    animate()
   }
 
   const purchaseItem = (item: RoutineGamifier.ShopItem) => {
