@@ -1,4 +1,5 @@
 import { pickRandom } from '@shared/pickRandom';
+import { publicPath } from '@shared/publicPath';
 import * as THREE from 'three';
 
 export function useRewardAnimation() {
@@ -28,8 +29,8 @@ export function useRewardAnimation() {
 
     const loader = new THREE.TextureLoader();
     coinTextures = [
-      loader.load('/RoutineGamifier/icons/coin-1.svg'),
-      loader.load('/RoutineGamifier/icons/coin-2.svg')
+      loader.load(publicPath('/icons/coin-1.svg')),
+      loader.load(publicPath('/icons/coin-2.svg'))
     ]
 
     window.addEventListener('resize', resizeScene);

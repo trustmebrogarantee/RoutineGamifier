@@ -1,0 +1,1 @@
+export const publicPath = (path: string): string => `/RoutineGamifier` + path

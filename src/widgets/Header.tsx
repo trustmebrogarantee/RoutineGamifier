@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RoutineGamifier } from '@shared/types/RoutineGamifier';
+import { publicPath } from '@shared/publicPath';
 
 interface Props {
   coins: RoutineGamifier.Coins
@@ -21,7 +22,7 @@ const Header: React.FC<Props> = ({ coins }) => (
         className="text-2xl font-bold text-yellow-300 flex items-center gap-2"
       >
         {coins}
-        <img width="34" height="34" src="/RoutineGamifier/icons/coin-1.svg" alt="" />
+        <img width="34" height="34" src={publicPath('/icons/coin-1.svg')} alt="" />
       </motion.div>
     </div>
   </header>

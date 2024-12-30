@@ -13,8 +13,9 @@ import { useHistory } from '@features/useHistory';
 import { useShop } from '@features/useShop';
 import { useTaskList } from '@features/useTaskList';
 import { useRewardAnimation } from '@features/useRewardAnimation';
-import useSound from 'use-sound';
 
+import useSound from 'use-sound';
+import { publicPath } from '@shared/publicPath';
 
 const DATE_KEY = (new Date()).toLocaleDateString('RU-ru')
 
@@ -33,7 +34,9 @@ const Dashboard: React.FC = () => {
   const shop = useShop({ storageKey: STORAGE_KEYS.CURRENT_SHOP_ITEMS })
   const taskList = useTaskList({ storageKey: STORAGE_KEYS.CURRENT_TASKS })
   const { animate } = useRewardAnimation() 
-  const [playRewardSound] = useSound(`/RoutineGamifier/sfx/money-rain.m4a`, { volume: 0.5 });
+  const [playRewardSound] = useSound(publicPath('/sfx/money-rain.m4a'), { volume: 0.5 });
+  const [playPurchaseSound] = useSound(publicPath('/sfx/purchase.m4a'), { volume: 0.5 });
+
 
   const completeTask = (task: RoutineGamifier.Task) => {
     balance.topUp(task.reward)
@@ -48,6 +51,7 @@ const Dashboard: React.FC = () => {
       balance.spend(item.price)
       purchaseHistory.add('PURCHASE', item.name, item)
       shop.remove(item.id)
+      playPurchaseSound()
     }
   }
 
