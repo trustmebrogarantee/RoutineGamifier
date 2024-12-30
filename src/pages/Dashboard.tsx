@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css';
-import React from 'react';
+import React, { useState } from 'react';
 import type { RoutineGamifier } from '@shared/types/RoutineGamifier';
 
 import Shop from '@widgets/Shop';
@@ -34,8 +34,10 @@ const Dashboard: React.FC = () => {
   const shop = useShop({ storageKey: STORAGE_KEYS.CURRENT_SHOP_ITEMS })
   const taskList = useTaskList({ storageKey: STORAGE_KEYS.CURRENT_TASKS })
   const { animate } = useRewardAnimation() 
-  const [playRewardSound] = useSound(publicPath('/sfx/money-rain.m4a'), { volume: 0.5 });
+  const [playRewardSound] = useSound(publicPath('/sfx/reward.mp3'), { volume: 0.5 });
   const [playPurchaseSound] = useSound(publicPath('/sfx/purchase.m4a'), { volume: 0.5 });
+  const [playBackgroundSound] = useSound(publicPath('/sfx/bg-music.mp3'), { volume: 0.5 });
+  const [blockerVisible, setBlockerVisible] = useState(true)
 
 
   const completeTask = (task: RoutineGamifier.Task) => {
@@ -56,20 +58,34 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="font-mono min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 flex flex-col items-center">
-      <Header coins={balance.balance} />
-      <main className="w-full max-w-4xl">
-        <TaskList taskList={taskList} completeTask={completeTask} />
-        <Shop coins={balance.balance} shopItems={shop.items} purchaseItem={purchaseItem} />
-        <PurchaseHistory history={purchaseHistory} />
-        <TaskHistory history={completedTasksHistory} />
-        <button className="pt-4" onClick={() => {
-          localStorage.removeItem(STORAGE_KEYS.CURRENT_TASKS)
-          scrollTo(0, 0)
-          location.reload()
-        }}>Reset cache</button>
-      </main>
-    </div>
+    <>
+    {blockerVisible && (
+        <div className="bg-gradient-to-r from-purple-500 to-pink-500 fixed inset-0 flex justify-center items-center z-10">
+          <button 
+            className="px-8 py-4 rounded text-white bg-blue-500 hover:bg-blue-600 text-lg"
+            onClick={() => {
+              setBlockerVisible(false)
+              playBackgroundSound()
+            }}>
+            Войти
+          </button>
+        </div>
+      )} 
+      <div className="font-mono min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 flex flex-col items-center">
+        <Header coins={balance.balance} />
+        <main className="w-full max-w-4xl">
+          <TaskList taskList={taskList} completeTask={completeTask} />
+          <Shop coins={balance.balance} shopItems={shop.items} purchaseItem={purchaseItem} />
+          <PurchaseHistory history={purchaseHistory} />
+          <TaskHistory history={completedTasksHistory} />
+          <button className="pt-4" onClick={() => {
+            localStorage.removeItem(STORAGE_KEYS.CURRENT_TASKS)
+            scrollTo(0, 0)
+            location.reload()
+          }}>Reset cache</button>
+        </main>
+      </div>
+    </>
   );
 };
 
