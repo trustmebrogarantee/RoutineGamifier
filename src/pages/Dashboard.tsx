@@ -34,9 +34,9 @@ const Dashboard: React.FC = () => {
   const shop = useShop({ storageKey: STORAGE_KEYS.CURRENT_SHOP_ITEMS })
   const taskList = useTaskList({ storageKey: STORAGE_KEYS.CURRENT_TASKS })
   const { animate } = useRewardAnimation() 
-  const [playRewardSound] = useSound(publicPath('/sfx/reward.mp3'), { volume: 0.5 });
-  const [playPurchaseSound] = useSound(publicPath('/sfx/purchase.m4a'), { volume: 0.5 });
-  const [playBackgroundSound] = useSound(publicPath('/sfx/bg-music.mp3'), { volume: 0.5 });
+  const [playRewardSound] = useSound(publicPath('/sfx/reward.mp3'), { volume: 0.1 });
+  const [playPurchaseSound] = useSound(publicPath('/sfx/purchase.m4a'), { volume: 0.1 });
+  const [playBackgroundSound] = useSound(publicPath('/sfx/bg-music.mp3'), { volume: 0.05, loop: true });
   const [blockerVisible, setBlockerVisible] = useState(true)
 
 
@@ -60,16 +60,16 @@ const Dashboard: React.FC = () => {
   return (
     <>
     {blockerVisible && (
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 fixed inset-0 flex justify-center items-center z-10">
-          <button 
-            className="px-8 py-4 rounded text-white bg-blue-500 hover:bg-blue-600 text-lg"
-            onClick={() => {
-              setBlockerVisible(false)
-              playBackgroundSound()
-            }}>
-            Войти
-          </button>
-        </div>
+      <div className="bg-gradient-to-r from-purple-500 to-pink-500 fixed inset-0 flex justify-center items-center z-10">
+        <button 
+          className="px-8 py-4 rounded text-white bg-blue-500 hover:bg-blue-600 text-lg"
+          onClick={() => {
+            setBlockerVisible(false)
+            playBackgroundSound()
+          }}>
+          Войти
+        </button>
+      </div>
       )} 
       <div className="font-mono min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 flex flex-col items-center">
         <Header coins={balance.balance} />
