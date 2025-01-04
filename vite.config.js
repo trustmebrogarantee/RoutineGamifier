@@ -18,6 +18,10 @@ export default defineConfig({
     }
   },
 
+  preview: {
+    port: 5000
+  },
+
   plugins: [react(), VitePWA({
     registerType: 'autoUpdate',
     injectRegister: false,
