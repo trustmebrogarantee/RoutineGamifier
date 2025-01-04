@@ -8,9 +8,8 @@ export type Options = {
 }
 
 export const useTaskList = ({ storageKey }: Options): RoutineGamifier.ITaskList => {
-  const GENERATED_TASKS_NUMBER = 4
+  const GENERATED_TASKS_NUMBER = 6
   const [items, setItems] = useStoredState(storageKey, times(GENERATED_TASKS_NUMBER, generateTask))
-  console.log(items);
   
   return {
     items,
