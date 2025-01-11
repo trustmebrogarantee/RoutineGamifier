@@ -24,13 +24,16 @@
 
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@pages/*": ["src/pages/*"],
-      "@widgets/*": ["src/widgets/*"],
-      "@utils/*": ["src/utils/*"],
-      "@features/*": ["src/features/*"],
-      "@shared/*": ["src/shared/*"],
+      "@site/*": ["packages/site_ui/src/*"],
+      "@site:app/*": ["packages/site_ui/src/app/*"],
+      "@site:pages/*": ["packages/site_ui/src/pages/*"],
+      "@site:widgets/*": ["packages/site_ui/src/widgets/*"],
+      "@site:utils/*": ["packages/site_ui/src/utils/*"],
+      "@site:features/*": ["packages/site_ui/src/features/*"],
+      "@site:shared/*": ["packages/site_ui/src/shared/*"],
+
+      "@game/*": ["packages/game_ui/src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["packages", "main.tsx"]
 }

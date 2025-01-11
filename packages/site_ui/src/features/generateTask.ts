@@ -1,6 +1,6 @@
-import { pickRandom } from '@shared/pickRandom';
-import { randomUid } from '@shared/randomUid';
-import { RoutineGamifier } from '@shared/types/RoutineGamifier';
+import { pickRandom } from '@site:shared/pickRandom';
+import { randomUid } from '@site:shared/randomUid';
+import { RoutineGamifier } from '@site:shared/types/RoutineGamifier';
 
 export const generateTask = (): RoutineGamifier.Task => {
   const count = Math.round(Math.random() * 100 + 1)

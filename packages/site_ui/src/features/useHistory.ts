@@ -1,6 +1,6 @@
-import type { RoutineGamifier } from '@shared/types/RoutineGamifier';
-import { useStoredState } from '@shared/useStoredState';
-import { randomUid } from '@shared/randomUid';
+import type { RoutineGamifier } from '@site:shared/types/RoutineGamifier';
+import { useStoredState } from '@site:shared/useStoredState';
+import { randomUid } from '@site:shared/randomUid';
 
 export type Options = {
   storageKey: string

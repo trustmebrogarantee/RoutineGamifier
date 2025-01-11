@@ -1,6 +1,6 @@
 import React from "react";
-import NotFound from "@shared/NotFound";
-import { RoutineGamifier } from "@shared/types/RoutineGamifier";
+import NotFound from "@site:shared/NotFound";
+import { RoutineGamifier } from "@site:shared/types/RoutineGamifier";
 
 interface Props {
   history: RoutineGamifier.History<RoutineGamifier.ShopItem>

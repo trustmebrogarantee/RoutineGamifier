@@ -1,21 +1,21 @@
 import 'tailwindcss/tailwind.css';
 import React, { useState } from 'react';
-import type { RoutineGamifier } from '@shared/types/RoutineGamifier';
+import type { RoutineGamifier } from '@site:shared/types/RoutineGamifier';
 
-import Shop from '@widgets/Shop';
-import Header from '@widgets/Header';
-import TaskList from '@widgets/TaskList';
-import TaskHistory from '@widgets/TaskHistory';
-import PurchaseHistory from '@widgets/PurchaseHistory';
+import Shop from '@site:widgets/Shop';
+import Header from '@site:widgets/Header';
+import TaskList from '@site:widgets/TaskList';
+import TaskHistory from '@site:widgets/TaskHistory';
+import PurchaseHistory from '@site:widgets/PurchaseHistory';
 
-import { useBalance } from '@features/useBalance';
-import { useHistory } from '@features/useHistory';
-import { useShop } from '@features/useShop';
-import { useTaskList } from '@features/useTaskList';
-import { useRewardAnimation } from '@features/useRewardAnimation';
+import { useBalance } from '@site:features/useBalance';
+import { useHistory } from '@site:features/useHistory';
+import { useShop } from '@site:features/useShop';
+import { useTaskList } from '@site:features/useTaskList';
+import { useRewardAnimation } from '@site:features/useRewardAnimation';
 
 import useSound from 'use-sound';
-import { publicPath } from '@shared/publicPath';
+import { publicPath } from '@site:shared/publicPath';
 
 const DATE_KEY = (new Date()).toLocaleDateString('RU-ru')
 

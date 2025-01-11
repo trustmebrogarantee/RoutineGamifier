@@ -1,7 +1,7 @@
-import type { RoutineGamifier } from '@shared/types/RoutineGamifier';
-import { times } from '@shared/times';
-import { useStoredState } from '@shared/useStoredState';
-import { generateTask } from '@features/generateTask';
+import type { RoutineGamifier } from '@site:shared/types/RoutineGamifier';
+import { times } from '@site:shared/times';
+import { useStoredState } from '@site:shared/useStoredState';
+import { generateTask } from '@site:features/generateTask';
 
 export type Options = {
   storageKey: string

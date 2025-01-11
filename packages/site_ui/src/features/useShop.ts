@@ -1,6 +1,6 @@
-import type { RoutineGamifier } from '@shared/types/RoutineGamifier';
-import { times } from '@shared/times';
-import { useStoredState } from '@shared/useStoredState';
+import type { RoutineGamifier } from '@site:shared/types/RoutineGamifier';
+import { times } from '@site:shared/times';
+import { useStoredState } from '@site:shared/useStoredState';
 import { generateShopItem } from './generateShopItem';
 
 export type Options = {

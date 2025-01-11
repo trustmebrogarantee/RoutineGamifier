@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import NotFound from '@shared/NotFound';
-import { RoutineGamifier } from "@shared/types/RoutineGamifier";
+import NotFound from '@site:shared/NotFound';
+import { RoutineGamifier } from "@site:shared/types/RoutineGamifier";
 
 interface Props {
   taskList: RoutineGamifier.ITaskList,

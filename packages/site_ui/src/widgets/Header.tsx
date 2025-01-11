@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { RoutineGamifier } from '@shared/types/RoutineGamifier';
-import { publicPath } from '@shared/publicPath';
+import { RoutineGamifier } from '@site:shared/types/RoutineGamifier';
+import { publicPath } from '@site:shared/publicPath';
 
 interface Props {
   coins: RoutineGamifier.Coins

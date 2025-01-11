@@ -9,12 +9,14 @@ export default defineConfig({
   base: '/RoutineGamifier/',
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      '@app': path.resolve(__dirname, './src/app'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@widgets': path.resolve(__dirname, './src/widgets'),
-      '@features': path.resolve(__dirname, './src/features'),
-      '@shared': path.resolve(__dirname, './src/shared'),
+      "@site": path.resolve(__dirname, "./packages/site_ui/src"),
+      '@site:app': path.resolve(__dirname, './packages/site_ui/src/app'),
+      '@site:pages': path.resolve(__dirname, './packages/site_ui/src/pages'),
+      '@site:widgets': path.resolve(__dirname, './packages/site_ui/src/widgets'),
+      '@site:features': path.resolve(__dirname, './packages/site_ui/src/features'),
+      '@site:shared': path.resolve(__dirname, './packages/site_ui/src/shared'),
+
+      '@game': path.resolve(__dirname, "./packages/game_ui/src")
     }
   },
 

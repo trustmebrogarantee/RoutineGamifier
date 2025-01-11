@@ -1,5 +1,5 @@
-import { pickRandom } from '@shared/pickRandom';
-import { publicPath } from '@shared/publicPath';
+import { pickRandom } from '@site:shared/pickRandom';
+import { publicPath } from '@site:shared/publicPath';
 import * as THREE from 'three';
 
 export function useRewardAnimation() {
