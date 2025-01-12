@@ -21,6 +21,7 @@ export class Mouse extends EventEmitter {
     this.y = 0
 
     this.pressmap = {
+
       lmb: false,
       rmb: false,
       wheel: false
@@ -30,12 +31,19 @@ export class Mouse extends EventEmitter {
     this.listenerTarget.addEventListener('mousedown', this.#mousedownListener.bind(this))
     this.listenerTarget.addEventListener('mouseup', this.#mouseupListener.bind(this))
     this.listenerTarget.addEventListener('mousemove', this.#mousemoveListener.bind(this), { passive: true })
+    this.listenerTarget.addEventListener('touchstart', this.#touchstartListener.bind(this))
+    this.listenerTarget.addEventListener('touchend', this.#touchendListener.bind(this))
+    this.listenerTarget.addEventListener('touchmove', this.#touchmoveListener.bind(this))
     this.listenerTarget.addEventListener('wheel', this.#wheelListener.bind(this))
 
     this.emittedEvents = [
       'pressmove',
       'freemove',
       'mousemove',
+
+      'touchstart',
+      'touchmove',
+      'touchend',
 
       'lmb-click',
       'lmb-mousedown',
@@ -96,6 +104,16 @@ export class Mouse extends EventEmitter {
     this.#emitEvent(`${this.#getButtonKeyName(event.button)}-mousedown`)
   }
 
+  #touchstartListener(event) {
+    const touches = event.touches
+    if (touches.length > 0) {
+      const [firstTouch] = touches 
+      if (this.options.preventDefault) event.preventDefault()
+      this.#updateCoords(firstTouch.clientX, firstTouch.clientY)
+      this.#emitEvent('touchstart')
+    }
+  }
+
   #mouseupListener(event) {
     if (this.options.preventDefault) event.preventDefault()
     this.#updateCoords(event.clientX, event.clientY)
@@ -103,6 +121,16 @@ export class Mouse extends EventEmitter {
     if (this.pressmap[buttonKeyName]) this.#emitEvent(`${buttonKeyName}-click`)
     this.#updatePressmap('mouseup', event.button)
     this.#emitEvent(`${buttonKeyName}-mouseup`)
+  }
+
+  #touchendListener(event) {
+    const touches = event.changedTouches
+    if (touches.length > 0) {
+      const [firstTouch] = touches 
+      if (this.options.preventDefault) event.preventDefault()
+      this.#updateCoords(firstTouch.clientX, firstTouch.clientY)
+      this.#emitEvent('touchend')
+    }
   }
 
   #mousemoveListener(event) {
@@ -115,6 +143,17 @@ export class Mouse extends EventEmitter {
       this.#emitEvent('pressmove', { key, deltaX: event.movementX, deltaY: event.movementY })
       this.#emitEvent(`${key}-pressmove`, { deltaX: event.movementX, deltaY: event.movementY })
     })
+  }
+
+  #touchmoveListener(event) {
+    const touches = event.touches
+    if (touches.length > 0) {
+      const [firstTouch] = touches 
+      if (this.options.preventDefault) event.preventDefault()
+      this.#emitEvent('touchmove', { deltaX: firstTouch.clientX - this.x, deltaY: firstTouch.clientY - this.y })
+      this.#updateCoords(firstTouch.clientX, firstTouch.clientY)
+    
+    }
   }
 
   #wheelListener(event) {

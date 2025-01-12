@@ -1,4 +1,4 @@
-import { THREE, Mouse } from "../level_0";
+import { THREE, Mouse, gameCamera } from "../level_0";
 
 export class MeshVerticiesEditor {
   public editorMeshes: THREE.Mesh[] = []
@@ -17,16 +17,27 @@ export class MeshVerticiesEditor {
     this.mouse.on('lmb-mousedown', this.PickVertice.bind(this))
     this.mouse.on('lmb-mouseup', this.UnpickVertice.bind(this))
     this.mouse.on('mousemove', this.MorphVertex.bind(this))
+    this.mouse.on('touchstart', this.PickVertice.bind(this))
+    this.mouse.on('touchend', this.UnpickVertice.bind(this))
+    this.mouse.on('touchmove', this.MorphVertex.bind(this))
   }
 
   GenerateMorphVerticies() {
+    // Генерируем треугольник
+    const geometry = new THREE.ConeGeometry(0.2, 0.5, 5, 1);
+
+    geometry.rotateX(- (Math.PI / 2))
+    
     const verticies = this.targetMesh.geometry.attributes.position.array
     for (let i = 0; i < verticies.length / 3; i++) {
       const x = verticies[i * 3]
       const y = verticies[i * 3 + 1]
-      const z = verticies[i * 3 + 2] + 0.1
+      const z = verticies[i * 3 + 2] + 0.3
+
       const material = new THREE.MeshStandardMaterial({ color: this.color })
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), material)
+      const mesh = new THREE.Mesh(geometry, material)
+      // material.side = THREE.DoubleSide
+
       mesh.userData = { verticies: [i * 3, i * 3 + 1, i * 3 + 2] }
       mesh.position.set(x, y, z)
       this.editorMeshes.push(mesh)
@@ -48,10 +59,12 @@ export class MeshVerticiesEditor {
     object.geometry.attributes.position.needsUpdate = true
   }
 
-  PickVertice () {
+  PickVertice ({ x, y }) {
+    this.pointer.set(x, y)
+    this.raycaster.setFromCamera(this.pointer, gameCamera);
     const intersects: THREE.Intersection<THREE.Mesh>[] = this.raycaster.intersectObjects(this.editorMeshes);
-    
     const [intersection] = intersects
+
     if (intersection) {
       this.activeIntersection = intersection
       this.activeIntersection.object.material.color = this.activeColor

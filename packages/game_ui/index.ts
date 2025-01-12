@@ -67,8 +67,8 @@ export const startWebGLApplication = () => {
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
   gameScene.add(ambientLight)
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff,8.25); // Белый свет
-  directionalLight.position.set(5, 1.2, 4.8); // Расположить свет выше плоскости
+  const directionalLight = new THREE.DirectionalLight(0xffffff,7.65); // Белый свет
+  directionalLight.position.set(10, 4.7, 4.7); // Расположить свет выше плоскости
   directionalLight.castShadow = true; // Включить отбрасывание теней
   gameScene.add(directionalLight);
 
@@ -84,8 +84,8 @@ export const startWebGLApplication = () => {
   lightFolder.add(directionalLight.position, 'z', 0, 10, 0.1)
   lightFolder.add(directionalLight, 'intensity', 0, 20, 0.05)
   const raycast = () => {
-    raycaster.setFromCamera( terrainEditor.pointer, gameCamera );
-    orbitControls.enabled = !terrainEditor.activeIntersection
+  raycaster.setFromCamera( terrainEditor.pointer, gameCamera );
+  orbitControls.enabled = !terrainEditor.activeIntersection
   }
 
   renderer.setAnimationLoop((time, frame) => {

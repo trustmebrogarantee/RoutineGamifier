@@ -30,13 +30,18 @@ export class Surface extends Group {
   }
 
   GenerateTerrain () {
-    const width = 50
-    const height = 50
+    const width = 200
+    const height = 200
     const depth = 50
     const geometry = new THREE.PlaneGeometry(width, height, depth, depth)
     const savedTerrain = window.localStorage.getItem('terrain')
     if (savedTerrain) {
       const verticies = JSON.parse(savedTerrain)
+      geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verticies), 3))
+      geometry.computeVertexNormals();
+    } else {
+      const verticies = Array.from(geometry.attributes.position.array)
+      for (let i = 0; i < verticies.length; i += 3) verticies[i + 2] = Math.random() * 0.4
       geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verticies), 3))
       geometry.computeVertexNormals();
     }
