@@ -1,0 +1,1 @@
+export const wrapperElement = document.getElementById('game-wrapper') as HTMLElement;

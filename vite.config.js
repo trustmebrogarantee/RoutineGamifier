@@ -16,7 +16,7 @@ export default defineConfig({
       '@site:features': path.resolve(__dirname, './packages/site_ui/src/features'),
       '@site:shared': path.resolve(__dirname, './packages/site_ui/src/shared'),
 
-      '@game': path.resolve(__dirname, "./packages/game_ui/src")
+      '@game': path.resolve(__dirname, "./packages/game_ui")
     }
   },
 
