@@ -72,11 +72,11 @@ export const startWebGLApplication = () => {
   directionalLight.castShadow = true; // Включить отбрасывание теней
   gameScene.add(directionalLight);
 
-// Настройка теней для более качественного отображения
-// directionalLight.shadow.mapSize.width = 1024;
-// directionalLight.shadow.mapSize.height = 1024;
-// directionalLight.shadow.camera.near = 0.5;
-// directionalLight.shadow.camera.far = 5000;
+  // Настройка теней для более качественного отображения
+  directionalLight.shadow.mapSize.width = 1024;
+  directionalLight.shadow.mapSize.height = 1024;
+  directionalLight.shadow.camera.near = 0.5;
+  directionalLight.shadow.camera.far = 5000;
 
   const lightFolder = guiInstance.addFolder('light')
   lightFolder.add(directionalLight.position, 'x', 0, 10, 0.1)

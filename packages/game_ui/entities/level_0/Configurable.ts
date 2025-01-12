@@ -1,7 +1,7 @@
 import * as dat from 'dat.gui';
 
 // Экземпляр dat.GUI, который используется для конфигурации
-export const guiInstance = new dat.GUI({ width: 400 })
+export const guiInstance = new dat.GUI({ width: 300, closed: true })
 
 /**
  * Декоратор для настройки отображения свойств в dat.GUI.
