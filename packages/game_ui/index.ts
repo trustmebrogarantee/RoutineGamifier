@@ -37,6 +37,8 @@ export const startWebGLApplication = () => {
       y: (value: number) => ((value / wrapperElement.clientHeight) * 2 - 1) * -1,
       deltaX: (value: number) => (value / wrapperElement.clientWidth),
       deltaY: (value: number) => (value / wrapperElement.clientHeight) * -1,
+      radiusX: (value: number) => (value / wrapperElement.clientWidth),
+      radiusY: (value: number) => (value / wrapperElement.clientHeight) * -1
     }
   })
 

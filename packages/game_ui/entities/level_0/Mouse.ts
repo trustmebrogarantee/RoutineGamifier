@@ -76,11 +76,12 @@ export class Mouse extends EventEmitter {
 
   #emitEvent(eventName, extendPayload = {}, payload = { x: this.x, y: this.y }) {
     Object.assign(payload, extendPayload)
-    if (payload.x) payload.x = this.options.morphCoords.x(payload.x)
-    if (payload.y) payload.y = this.options.morphCoords.y(payload.y)
-    if (payload.deltaX) payload.deltaX = this.options.morphCoords.deltaX(payload.deltaX)
-    if (payload.deltaY) payload.deltaY = this.options.morphCoords.deltaY(payload.deltaY)
-
+    for (const coordKey of Object.keys(this.options.morphCoords)) {
+      if (payload[coordKey]) {
+        payload[coordKey] = this.options.morphCoords[coordKey](payload[coordKey])
+      }
+    }
+    
     Object.entries(this.options.combinedEvents).forEach(([combinedEventName, value]) => {
         if (value.includes(eventName)) this.emit(combinedEventName, Object.assign(payload, { fromEvent: eventName }))
     })
@@ -105,16 +106,18 @@ export class Mouse extends EventEmitter {
   }
 
   #touchstartListener(event) {
+    console.log(event);
     const touches = event.touches
     if (touches.length > 0) {
       const [firstTouch] = touches 
       if (this.options.preventDefault) event.preventDefault()
       this.#updateCoords(firstTouch.clientX, firstTouch.clientY)
-      this.#emitEvent('touchstart')
+      this.#emitEvent('touchstart', { radiusX: firstTouch.radiusX, radiusY: firstTouch.radiusY })
     }
   }
 
   #mouseupListener(event) {
+    
     if (this.options.preventDefault) event.preventDefault()
     this.#updateCoords(event.clientX, event.clientY)
     const buttonKeyName = this.#getButtonKeyName(event.button)

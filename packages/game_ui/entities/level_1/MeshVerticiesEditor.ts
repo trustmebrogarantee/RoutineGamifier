@@ -1,4 +1,5 @@
 import { THREE, Mouse, gameCamera } from "../level_0";
+import isTouchDevice from 'is-touch-device'
 
 export class MeshVerticiesEditor {
   public editorMeshes: THREE.Mesh[] = []
@@ -24,7 +25,8 @@ export class MeshVerticiesEditor {
 
   GenerateMorphVerticies() {
     // Генерируем треугольник
-    const geometry = new THREE.ConeGeometry(0.2, 0.5, 5, 1);
+    const touchDeviceFactor = isTouchDevice() ? 2 : 1
+    const geometry = new THREE.ConeGeometry(0.2 * touchDeviceFactor, 0.5 * touchDeviceFactor, 5, 1);
 
     geometry.rotateX(- (Math.PI / 2))
     
@@ -32,7 +34,7 @@ export class MeshVerticiesEditor {
     for (let i = 0; i < verticies.length / 3; i++) {
       const x = verticies[i * 3]
       const y = verticies[i * 3 + 1]
-      const z = verticies[i * 3 + 2] + 0.3
+      const z = verticies[i * 3 + 2] + (0.3 * touchDeviceFactor)
 
       const material = new THREE.MeshStandardMaterial({ color: this.color })
       const mesh = new THREE.Mesh(geometry, material)
@@ -59,8 +61,10 @@ export class MeshVerticiesEditor {
     object.geometry.attributes.position.needsUpdate = true
   }
 
-  PickVertice ({ x, y }) {
+  PickVertice ({ x, y, radiusX, radiusY }) {
     this.pointer.set(x, y)
+
+    // Посмотреть есть ли вершины по координатам клика\тапа
     this.raycaster.setFromCamera(this.pointer, gameCamera);
     const intersects: THREE.Intersection<THREE.Mesh>[] = this.raycaster.intersectObjects(this.editorMeshes);
     const [intersection] = intersects
