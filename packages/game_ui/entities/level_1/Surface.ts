@@ -34,7 +34,7 @@ export class Surface extends Group {
     const height = 200
     const depth = 50
     const geometry = new THREE.PlaneGeometry(width, height, depth, depth)
-    const savedTerrain = window.localStorage.getItem('terrain')
+    const savedTerrain = window.localStorage.getItem((new Date()).toLocaleDateString('ru-RU') + '_surface.terrain_verticies_')
     if (savedTerrain) {
       const verticies = JSON.parse(savedTerrain)
       geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verticies), 3))

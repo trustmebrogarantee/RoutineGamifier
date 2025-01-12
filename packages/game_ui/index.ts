@@ -47,7 +47,7 @@ export const startWebGLApplication = () => {
     new THREE.Color('red'),
     new THREE.Color('green'),
     (value) => {
-      localStorage.setItem('terrain', JSON.stringify(value))
+      localStorage.setItem((new Date()).toLocaleDateString('ru-RU') + '_surface.terrain_verticies_', JSON.stringify(value))
     }
   )
 
