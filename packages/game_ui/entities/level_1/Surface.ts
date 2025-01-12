@@ -41,7 +41,7 @@ export class Surface extends Group {
       geometry.computeVertexNormals();
     } else {
       const verticies = Array.from(geometry.attributes.position.array)
-      for (let i = 0; i < verticies.length; i += 3) verticies[i + 2] = Math.random() * 0.4
+      for (let i = 0; i < verticies.length; i += 3) verticies[i + 2] = Math.random() * 1.25
       geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verticies), 3))
       geometry.computeVertexNormals();
     }

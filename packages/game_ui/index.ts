@@ -22,14 +22,12 @@ export const startWebGLApplication = () => {
 
   const surface = new Surface()
   const axesHelper = new THREE.AxesHelper(2)
-  const orbitControls = new OrbitControls(gameCamera, wrapperElement)
-  orbitControls.enableDamping = true
-
+  
   gameScene.add(axesHelper, surface)
-
+  
   const raycaster = new THREE.Raycaster();
   
-
+  
   const mouse = new Mouse(wrapperElement, {
     preventDefault: true,
     morphCoords: {
@@ -41,7 +39,7 @@ export const startWebGLApplication = () => {
       radiusY: (value: number) => (value / wrapperElement.clientHeight) * -1
     }
   })
-
+  
   const terrainEditor = new MeshVerticiesEditor(
     raycaster,
     surface.terrain,
@@ -52,7 +50,7 @@ export const startWebGLApplication = () => {
       localStorage.setItem((new Date()).toLocaleDateString('ru-RU') + '_surface.terrain_verticies_', JSON.stringify(value))
     }
   )
-
+  
   gameScene.background = new THREE.CubeTextureLoader()
   .setPath('/RoutineGamifier/environmentMaps/1/')
   .load(
@@ -65,35 +63,52 @@ export const startWebGLApplication = () => {
       'nz.jpg'
     ]
   )
-
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+  
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.75)
   gameScene.add(ambientLight)
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff,7.65); // Белый свет
-  directionalLight.position.set(10, 4.7, 4.7); // Расположить свет выше плоскости
+  
+  const directionalLight = new THREE.DirectionalLight(0xffffff,1.8); // Белый свет
+  directionalLight.position.set(7.5, 2.1, 0.9); // Расположить свет выше плоскости
   directionalLight.castShadow = true; // Включить отбрасывание теней
   gameScene.add(directionalLight);
-
+  
   // Настройка теней для более качественного отображения
   directionalLight.shadow.mapSize.width = 1024;
   directionalLight.shadow.mapSize.height = 1024;
   directionalLight.shadow.camera.near = 0.5;
   directionalLight.shadow.camera.far = 5000;
-
+  
   const lightFolder = guiInstance.addFolder('light')
   lightFolder.add(directionalLight.position, 'x', 0, 10, 0.1)
   lightFolder.add(directionalLight.position, 'y', 0, 100, 0.1)
   lightFolder.add(directionalLight.position, 'z', 0, 10, 0.1)
   lightFolder.add(directionalLight, 'intensity', 0, 20, 0.05)
+  
+  gameCamera.position.set(13.7, 13.7, 18.1)
+  gameCamera.quaternion.copy(new THREE.Quaternion(
+    -0.21218847201940816,
+    -0.44838640824093634,
+    -0.11047239821139881,
+    0.8612325646887043
+    
+  ))
+  const orbitControls = new OrbitControls(gameCamera, wrapperElement)
+  orbitControls.enableDamping = true
+  orbitControls.update()
   const raycast = () => {
-  raycaster.setFromCamera( terrainEditor.pointer, gameCamera );
-  orbitControls.enabled = !terrainEditor.activeIntersection
+    raycaster.setFromCamera( terrainEditor.pointer, gameCamera );
+    orbitControls.enabled = !terrainEditor.activeIntersection
   }
 
-  renderer.setAnimationLoop((time, frame) => {
+
+  orbitControls.target.set(25, 10, 25)
+  
+  renderer.setAnimationLoop(() => {
+    renderer.render(gameScene, gameCamera)
     raycast()
     orbitControls.update()
-    renderer.render(gameScene, gameCamera)
+    console.log(gameCamera.quaternion);
+    
   })
 
   window.addEventListener('resize', () => {
